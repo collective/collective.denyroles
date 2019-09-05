@@ -44,14 +44,6 @@ Problems:
 This add-on gives you options to prevent users with some global roles from accesing the (public) site.
 
 
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-
-- Soon on many COLLECTIVE sites.
-
-
 Installation
 ------------
 
