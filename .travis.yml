@@ -1,0 +1,20 @@
+language: python
+sudo: false
+cache:
+  pip: true
+  directories:
+  - eggs
+  - downloads
+python:
+  - "2.7"
+matrix:
+  fast_finish: true
+install:
+  - virtualenv -p `which python` .
+  - bin/pip install -r requirements.txt
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
+script:
+  - bin/test
+after_success:
+  - bin/code-analysis
