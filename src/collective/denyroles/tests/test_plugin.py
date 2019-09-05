@@ -106,3 +106,30 @@ class TestPluginUnit(BasePluginTestCase):
         user = TestUser("pipo", roles=["Member", "Editor"])
         with self.assertRaises(Forbidden):
             plugin.getRolesForPrincipal(user, request)
+
+
+class UtilsTestCase(BasePluginTestCase):
+    def test_must_check(self):
+        from collective.denyroles import config
+        from collective.denyroles.utils import must_check
+
+        # Default:
+        config.DENY_ROLES = None
+        self.assertTrue(must_check(self._make_request()))
+        self.assertTrue(must_check(self._make_request(do_check=True)))
+        self.assertFalse(must_check(self._make_request(dont_check=True)))
+        self.assertTrue(must_check(self._make_request(dont_check=True, do_check=True)))
+
+        # Never:
+        config.DENY_ROLES = False
+        self.assertFalse(must_check(self._make_request()))
+        self.assertFalse(must_check(self._make_request(do_check=True)))
+        self.assertFalse(must_check(self._make_request(dont_check=True)))
+        self.assertFalse(must_check(self._make_request(dont_check=True, do_check=True)))
+
+        # Always:
+        config.DENY_ROLES = True
+        self.assertTrue(must_check(self._make_request()))
+        self.assertTrue(must_check(self._make_request(do_check=True)))
+        self.assertTrue(must_check(self._make_request(dont_check=True)))
+        self.assertTrue(must_check(self._make_request(dont_check=True, do_check=True)))
