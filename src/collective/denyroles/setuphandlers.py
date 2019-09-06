@@ -26,7 +26,9 @@ def pre_install(context):
     """
     if must_check(context.REQUEST):
         raise Forbidden(
-            "Refusing to activate collective.denyroles. This would lock the current user out."
+            "Refusing to activate collective.denyroles. "
+            "This would lock the current user out. "
+            "See https://github.com/collective/collective.denyroles"
         )
 
 
