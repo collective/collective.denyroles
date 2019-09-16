@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from collective.denyroles import config
 from collective.denyroles.utils import must_check
-from Products.PluggableAuthService.PluggableAuthService import PluggableAuthService as PAS
 from Products.PluggableAuthService.interfaces.authservice import _noroles
+from Products.PluggableAuthService.PluggableAuthService import PluggableAuthService as PAS
 
 
 PAS._orig_authorizeUser = PAS._authorizeUser
