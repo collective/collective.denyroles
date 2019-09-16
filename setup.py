@@ -37,5 +37,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=["setuptools"],
-    extras_require={"test": ["plone.app.testing", "plone.testing>=5.0.0"]},
+    extras_require={"test": ["plone.app.testing", "plone.testing"]},
 )
