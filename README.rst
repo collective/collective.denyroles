@@ -6,42 +6,15 @@
 collective.denyroles
 =============
 
-DO NOT USE THIS YET!
-This is a work in progress.
-And I notice two fundamental flaws:
-
-- ``getRolesForPrincipal`` is **not** called for users defined in the zope root.
-
-- ``getRolesForPrincipal`` is not only called for the authenticated user as wanted, but also when checking **any** user or group.
-  For example, even as zope admin, you are forbidden to access the groups overview,
-  because for the Administrators our ``getRolesForPrincipal`` method is called, and it raises Forbidden.
-
-So I will need to rewrite this.
-Perhaps somewhere in a plugin with ``authenticateCredentials``,
-but there we would need to work with credentials that are extracted by a core plugin,
-which starts to sound like a bad idea.
-And it would not help for root Zope users.
-
-It looks like a patch in ``_authorizeUser`` in ``Products/PluggableAuthService/PluggableAuthService.py`` does the trick rather nicely.
-Too bad that it cannot be done in a proper plugin, but needs an ugly monkey patch.
-So be it.
-I will work on that shortly.
-
-
-Old info
---------
-
-This is a PAS (``PluggableAuthenticationService``) plugin for Plone.
+This is a monkey patch for PAS (``PluggableAuthenticationService``).
 It denies access to Plone Sites for users with roles like Manager or Editor.
 
 
 Features
 --------
 
-- A PAS roles plugin that checks the roles determined up to this point, and forbids access when some roles are found.
+- A patch for the PAS ``_authorizeUser`` method that checks the roles of the user, and forbids access when some roles are found.
 - Configuration via environment variables or request headers to see if the check should be done.
-- An installer that installs the plugin into ``acl_users``.
-- An uninstaller to remove the plugin.
 
 
 Use case
@@ -83,8 +56,7 @@ Install collective.denyroles by adding it to your buildout::
 
 
 and then running ``bin/buildout``.
-
-Install the product in the Add-ons control panel in Plone.
+It is immediately active, without needing activation within the Plone Site.
 
 You may need some more configuration in your buildout config.
 See the next section.
@@ -93,7 +65,7 @@ See the next section.
 Configuration
 -------------
 
-The roles that are denied access, can be seen in ``src/collective.denyroles/config.py``.
+The roles that are denied access, can be seen in ``src/collective/denyroles/config.py``.
 We might make this configurable at some point.
 
 There are two ways to configure whether the roles should be checked or not:
