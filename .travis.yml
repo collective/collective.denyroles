@@ -30,7 +30,7 @@ before_install:
   - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt
-  - sed -ie "s#5.1-latest#$PLONE_VERSION-latest#" buildout.cfg
+  - sed -ie "s#5.2-latest#$PLONE_VERSION-latest#" buildout.cfg
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
 install:
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True install $PART
