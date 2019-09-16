@@ -1,20 +1,38 @@
+dist: bionic
 language: python
 sudo: false
 cache:
   pip: true
   directories:
-  - eggs
-  - downloads
+  - buildout-cache
 python:
   - "2.7"
 matrix:
+  include:
+    - python: "2.7"
+      env: PLONE_VERSION="4.3" PART="test"
+    - python: "2.7"
+      env: PLONE_VERSION="5.1" PART="test"
+    - python: "2.7"
+      env: PLONE_VERSION="5.2" PART="test"
+    - python: "3.7"
+      env: PLONE_VERSION="5.2" PART="test"
+    - python: "3.7"
+      env: PLONE_VERSION="5.2" PART="code-analysis"
+  sudo: true
   fast_finish: true
-install:
+before_install:
+  - virtualenv -p `which python` .
+  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
+  - mkdir $HOME/.buildout
+  - echo "[buildout]" > $HOME/.buildout/default.cfg
+  - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
+  - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt
+  - sed -ie "s#5.1-latest#$PLONE_VERSION-latest#" buildout.cfg
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
-  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
+install:
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True install $PART
 script:
-  - bin/test
-after_success:
-  - bin/code-analysis
+  - bin/$PART
