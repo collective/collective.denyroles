@@ -10,6 +10,8 @@ def must_check(request=None):
         return deny_roles
     if request is None:
         request = getRequest()
+        if request is None:
+            return True
     if request.getHeader(config.DO_CHECK_ROLES_HEADER):
         return True
     if request.getHeader(config.DONT_CHECK_ROLES_HEADER):
