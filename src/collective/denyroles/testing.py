@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-# The next line needs plone.app.event[test].  Maybe not for all Plone versions.
-from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 
 
 class CollectiveDenyRolesLayer(PloneSandboxLayer):
-
-    defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
+    pass
 
 
 COLLECTIVE_DENYROLES_FIXTURE = CollectiveDenyRolesLayer()

@@ -36,6 +36,6 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    install_requires=["Products.GenericSetup>=1.8.2", "plone.api", "setuptools"],
-    extras_require={"test": ["plone.app.testing", "plone.testing>=5.0.0", "plone.app.event[test]"]},
+    install_requires=["setuptools"],
+    extras_require={"test": ["plone.app.testing", "plone.testing>=5.0.0"]},
 )
