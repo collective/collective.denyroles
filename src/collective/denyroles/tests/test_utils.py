@@ -34,6 +34,9 @@ class UtilsTestCase(unittest.TestCase):
         os.environ[config.DENY_ROLES_ENV] = "1"
         config.read_deny_roles_from_env()
         self.assertTrue(config.DENY_ROLES)
+        os.environ[config.DENY_ROLES_ENV] = "42"
+        config.read_deny_roles_from_env()
+        self.assertTrue(config.DENY_ROLES)
 
         # Bad value:
         os.environ[config.DENY_ROLES_ENV] = "no integer"
