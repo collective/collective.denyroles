@@ -19,16 +19,6 @@ class CollectiveDenyRolesLayer(PloneSandboxLayer):
         # layer.
         self.loadZCML(package=collective.denyroles)
 
-    def setUpPloneSite(self, portal):
-        from collective.denyroles import config
-
-        # Make sure we can install it without locking ourselves out.
-        orig = config.DENY_ROLES
-        config.DENY_ROLES = False
-        applyProfile(portal, "collective.denyroles:default")
-        # Restore.
-        config.DENY_ROLES = orig
-
 
 COLLECTIVE_DENYROLES_FIXTURE = CollectiveDenyRolesLayer()
 

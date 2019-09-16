@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.denyroles import config
-from collective.denyroles.plugins import DenyRolesPlugin
 from zope.publisher.browser import TestRequest
-from ZPublisher import Forbidden
 
 import unittest
 
@@ -20,14 +18,6 @@ class TestUser(object):
 
 class BasePluginTestCase(unittest.TestCase):
     """Base test case class with a few helper methods."""
-
-    def _make_plugin(self, request=None):
-        plugin = DenyRolesPlugin()
-        plugin.id = config.PLUGIN_ID
-        if request is None:
-            request = self._make_request()
-        plugin.REQUEST = request
-        return plugin
 
     def _make_request(self, do_check=False, dont_check=False):
         # Add zero, one or two headers to the request headers.
