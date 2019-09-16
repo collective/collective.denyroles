@@ -38,8 +38,4 @@ setup(
     zip_safe=False,
     install_requires=["Products.GenericSetup>=1.8.2", "plone.api", "setuptools"],
     extras_require={"test": ["plone.app.testing", "plone.testing>=5.0.0", "plone.app.event[test]"]},
-    entry_points="""
-    [z3c.autoinclude.plugin]
-    target = plone
-    """,
 )
