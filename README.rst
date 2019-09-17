@@ -145,6 +145,49 @@ The value does not matter, as long as the request header with this name exists,
 but 1 seems a good value.
 
 
+Suggested buildout usage
+------------------------
+
+This is a suggestion on how to properly add this in a buildout.
+Note that this focuses on configuring collective.denyroles, and ignores lots of other useful settings::
+
+    [zeoclient]
+    # Configuration for public zeoclient.
+    recipe = plone.recipe.zope2instance
+    http-address = 8080
+    zeo-client = on
+    eggs =
+        Plone
+        collective.denyroles
+    # Environment variables shared by all zeoclients:
+    base-environment-vars =
+        zope_i18n_compile_mo_files true
+    environment-vars =
+        ${:base-environment-vars}
+    # In the public zeoclient, we deny access to editors/managers:
+        DENY_ROLES 1
+
+    [zeoclient-cms]
+    # Second Plone zeoclient, only used for CMS, so for editors.
+    # The next weird line means: inherit all settings from the [zeoclient] section:
+    <= zeoclient
+    # Use a different port:
+    http-address = 8090
+    environment-vars =
+        ${:base-environment-vars}
+    # In the CMS zeoclient, we do not want to deny access to editors/managers:
+        DENY_ROLES 0
+
+    [instance]
+    # Standalone Plone instance without ZEO setup, for local development.
+    <= zeoclient
+    zeo-client = off
+    environment-vars =
+        ${:base-environment-vars}
+    # With single instance, we do not want to deny access to editors/managers:
+        DENY_ROLES 0
+
+
 Support
 -------
 
