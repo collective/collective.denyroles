@@ -31,8 +31,8 @@ before_install:
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt
   - sed -ie "s#5.2-latest#$PLONE_VERSION-latest#" buildout.cfg
-  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
+  - bin/buildout -N code-analysis:return-status-codes=True annotate
 install:
-  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True install $PART
+  - bin/buildout -N code-analysis:return-status-codes=True install $PART
 script:
   - bin/$PART
