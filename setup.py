@@ -12,7 +12,7 @@ long_description = "\n\n".join(
 
 setup(
     name="collective.denyroles",
-    version="1.0.0b2.dev0",
+    version="1.0.0b2",
     description="Plone PAS patch for denying access to editors and managers",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/

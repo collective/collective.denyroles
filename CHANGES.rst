@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0b2 (unreleased)
+1.0.0b2 (2019-09-17)
 --------------------
 
 - Fixed PyPI description.  [maurits]
