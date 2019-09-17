@@ -4,7 +4,7 @@ sudo: false
 cache:
   pip: true
   directories:
-  - buildout-cache
+  - $HOME/buildout-cache
 python:
   - "2.7"
 matrix:
