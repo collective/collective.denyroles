@@ -4,7 +4,6 @@ sudo: false
 cache:
   pip: true
   directories:
-  - downloads
   - eggs
 python:
   - "2.7"
