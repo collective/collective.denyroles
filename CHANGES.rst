@@ -5,7 +5,7 @@ Changelog
 1.0.0b2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Fixed PyPI description.  [maurits]
 
 
 1.0.0b1 (2019-09-17)
